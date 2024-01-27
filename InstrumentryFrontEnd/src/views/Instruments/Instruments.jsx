@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import "../../App.css";
-import BasicGrid from "../../components/BasicGrid/BasicGrid.jsx";
-import BasicFlex from "../../components/BasicFlex/BasicFlex.jsx";
+import BasicModal from "../../components/BasicModal/basicModal.jsx";
+import "./Instruments.css"
 
 //MAIN
 export default function Instruments() {
@@ -13,7 +13,7 @@ export default function Instruments() {
   //funciones
   function GetInstrumentData() {
     axios.
-    get("https://localhost:7124/Instrumentry").
+    get("https://localhost:7124/api/Instruments/GetInstrumentryBasicDTO").
     then((response) => setInstrument(response.data));
   }
 
@@ -30,7 +30,16 @@ export default function Instruments() {
 
   return (
     <>
-      <BasicFlex instrument={instrument} />
+      <div className="container">
+        <div className="flex">
+        {instrument.map((instrument, index) => (
+          <BasicModal 
+            instrument={instrument}
+            key={index}>
+          </BasicModal>
+        ))}
+        </div>
+      </div>
     </>
   );
 }
