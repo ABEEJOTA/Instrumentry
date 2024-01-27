@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
+import Item from '../Item/item.jsx';
 
 const style = {
   position: 'absolute',
@@ -19,24 +19,20 @@ const style = {
 
 export default function BasicModal(props) {
 
-  const {instrument, index} = props;
+  const {instrument} = props;
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   return (
-    <div>
-      <Button onClick={handleOpen}>
-        <div className="item-container" key={index}>
-          <div className="item">
-            <div className="container-img">
-              <img src={instrument.image}/>
-            </div>
-            <p>{instrument.model}<br/></p>
-            <p>{instrument.brand}</p>
-          </div>
-        </div>
-      </Button>
+    <div className="felx-element">
+      <div onClick={handleOpen} className="item-container">
+        <Item image={instrument.image}
+              title={instrument.brand}
+              subtitle={instrument.model}>
+        </Item>
+      </div>  
+      
 
       <Modal
         open={open}
@@ -45,14 +41,11 @@ export default function BasicModal(props) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <div className="item-container" key={index}>
-            <div className="item">
-              <div className="container-img">
-                <img src={instrument.image}/>
-              </div>
-              <p>{instrument.model}<br/></p>
-              <p>{instrument.brand}</p>
-            </div>
+          <div className="item-container">
+            <Item image={instrument.image}
+                  title={instrument.brand}
+                  subtitle={instrument.model}>
+            </Item>
           </div>
         </Box>
       </Modal>
